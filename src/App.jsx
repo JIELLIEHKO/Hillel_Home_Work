@@ -1,5 +1,5 @@
-import {HomeWork1} from "./HomeWork/HomeWork_1.jsx";
-import {HomeWork2} from "./HomeWork/HomeWork2/HomeWork2.jsx";
+import {Header} from "./components/Header.jsx";
+import {Main} from "./components/Main.jsx";
 
 function App() {
 
@@ -8,10 +8,9 @@ function App() {
         <div
             className="wrapper"
         >
-            <HomeWork2 />
+            <Header/>
+            <Main/>
         </div>
-
-        <HomeWork1 />
     </>
   )
 }

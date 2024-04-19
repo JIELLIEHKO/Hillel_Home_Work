@@ -1,11 +1,10 @@
 import {Button} from "../Button.jsx";
 import {useState} from "react";
 import {reference} from "../../Data.js";
-import './HomeWork.css'
 
 const Goat = reference[0].src;
 
-export function HomeWork1() {
+export function MagicalCourier() {
     const [changeImage, setChangeImage] = useState(Goat)
     const [activeButtonIndex, setActiveButtonIndex] = useState(0);
 
@@ -15,7 +14,7 @@ export function HomeWork1() {
     }
 
     return (<>
-        <div className="home-work">
+        <div className="container-courier">
 
             <h1>Home Work 1</h1>
             <h2>Make a choice!<br/><span className="text-yellow">What magical courier will deliver you pizza?</span></h2>

@@ -1,9 +1,9 @@
-import {Form} from "./Form.jsx";
+import {Form} from "../Form.jsx";
 
 export function Header() {
     return (<>
         <header className="header">
-            <a className="logo" href="/">Pizza Day</a>
+            <a className="logo" href="/public">Pizza Day</a>
 
             <Form
                 type={null}
