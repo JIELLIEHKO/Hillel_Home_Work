@@ -1,7 +1,7 @@
 import {Input} from "./Input.jsx";
 import {Button} from "./Button.jsx";
 
-// eslint-disable-next-line react/prop-types
+
 export function FormLogin({classForm, type, placeholder}) {
 
     return (<>

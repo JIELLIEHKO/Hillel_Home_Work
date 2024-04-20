@@ -1,5 +1,5 @@
 
-// eslint-disable-next-line react/prop-types
+
 export function Button({children, onClick, isActive}) {
 
     return ( <>

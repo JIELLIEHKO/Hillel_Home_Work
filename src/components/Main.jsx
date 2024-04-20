@@ -1,4 +1,4 @@
-import {FormLogin} from "../FormLogin.jsx";
+import {FormLogin} from "./FormLogin.jsx";
 import {MagicalCourier} from "./MagicalCourier.jsx";
 
 export function Main() {
