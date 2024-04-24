@@ -1,6 +1,6 @@
-import {Button} from "./Button.jsx";
+import {Button} from "./Button/Button.jsx";
 import {useState} from "react";
-import {reference} from "../../Data.js";
+import {reference} from "../../data.js";
 
 const Goat = reference[0].src;
 

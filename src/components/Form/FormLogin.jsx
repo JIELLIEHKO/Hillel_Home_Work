@@ -1,5 +1,5 @@
-import {Input} from "./Input.jsx";
-import {Button} from "./Button.jsx";
+import {Input} from "../Input/Input.jsx";
+import {Button} from "../Button/Button.jsx";
 
 
 export function FormLogin({classForm, type, placeholder}) {

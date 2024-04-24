@@ -1,5 +1,6 @@
-import {FormLogin} from "./FormLogin.jsx";
+import {FormLogin} from "./Form/FormLogin.jsx";
 import {MagicalCourier} from "./MagicalCourier.jsx";
+import {Menu} from "./Menu/Menu.jsx";
 
 export function Main() {
     return (<>
@@ -17,6 +18,11 @@ export function Main() {
                     placeholder={'Your full name'}
                     classForm={"login-form"}
                 />
+
+            </div>
+
+            <div className='container-menu'>
+                <Menu />
             </div>
 
             <MagicalCourier/>
