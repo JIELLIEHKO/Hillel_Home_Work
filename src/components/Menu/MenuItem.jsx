@@ -1,7 +1,13 @@
 import './Menu.css'
+import { Counter } from '../Counter/Counter.jsx'
+import { Button } from '../Button/Button.jsx'
+import { useState } from 'react'
 // €
 export function MenuItem({ img, name, ingredients, price, sold }) {
+	const [showButton, setShowButton] = useState(false)
+
 	const handleClickButton = () => {
+		setShowButton(!showButton)
 		console.log(`Pizza ${name} added to cart`)
 	}
 
@@ -26,10 +32,16 @@ export function MenuItem({ img, name, ingredients, price, sold }) {
 							>
 								{!sold ? `€${price}.00` : 'SOLD OUT'}
 							</p>
-							{!sold && (
-								<button onClick={handleClickButton} className='button'>
-									Add to cart
-								</button>
+
+							{showButton && !sold ? (
+								<Counter onDelete={handleClickButton} />
+							) : (
+								!showButton &&
+								!sold && (
+									<div className='counter-button'>
+										<Button onClick={handleClickButton}>Add to cart</Button>
+									</div>
+								)
 							)}
 						</div>
 					</div>

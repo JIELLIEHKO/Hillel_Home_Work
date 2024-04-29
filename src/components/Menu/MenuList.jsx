@@ -10,8 +10,8 @@ export function MenuList() {
 						key={pizza.name}
 						img={pizza.imageUrl}
 						name={pizza.name}
-						ingredients={pizza.ingredients.map(ingredient => {
-							return <p key={ingredient}>{ingredient}</p>
+						ingredients={pizza.ingredients.map((ingredient, index) => {
+							return <p key={index}>{ingredient}</p>
 						})}
 						price={pizza.unitPrice}
 						sold={pizza.soldOut && true}
