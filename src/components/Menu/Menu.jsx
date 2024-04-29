@@ -1,11 +1,9 @@
-import {MenuList} from "./MenuList.jsx";
+import { MenuList } from './MenuList.jsx'
 
 export function Menu() {
-
-    return (<>
-
-        <MenuList />
-
-    </>);
-
+	return (
+		<>
+			<MenuList />
+		</>
+	)
 }
