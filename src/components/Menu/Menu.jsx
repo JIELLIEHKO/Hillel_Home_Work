@@ -26,9 +26,7 @@ export function Menu() {
 
 	return (
 		<>
-			{menu.map((pizzas, index) => (
-				<MenuList key={index} pizzas={pizzas} />
-			))}
+			<MenuList pizzas={menu} />
 		</>
 	)
 }
