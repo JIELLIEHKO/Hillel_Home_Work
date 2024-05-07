@@ -1,10 +1,10 @@
-import { FormLogin } from './Form/FormLogin.jsx'
-import { MagicalCourier } from './MagicalCourier.jsx'
-import { Menu } from './Menu/Menu.jsx'
+import { FormLogin } from '../components/Form/FormLogin.jsx'
+import { Header } from '../components/Header.jsx'
 
-export function Main() {
+export function Login() {
 	return (
 		<>
+			<Header />
 			<main className='main'>
 				<div className='hero'>
 					<h1 className='title'>
@@ -24,12 +24,6 @@ export function Main() {
 						classForm={'login-form'}
 					/>
 				</div>
-
-				<div className='container-menu'>
-					<Menu />
-				</div>
-
-				<MagicalCourier />
 			</main>
 		</>
 	)

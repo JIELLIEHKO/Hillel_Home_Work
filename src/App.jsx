@@ -1,12 +1,18 @@
-import { Header } from './components/Header.jsx'
-import { Main } from './components/Main.jsx'
+import { Main } from './pages/Main.jsx'
+import { Route, Routes } from 'react-router-dom'
+import { Login } from './pages/Login.jsx'
+import { PageNotFound } from './pages/PageNotFound.jsx'
 
 function App() {
 	return (
 		<>
 			<div className='wrapper'>
-				<Header />
-				<Main />
+				<Routes>
+					<Route path='/menu' element={<Main />} />
+					<Route path='/login' element={<Login />} />
+
+					<Route path='*' element={<PageNotFound />} />
+				</Routes>
 			</div>
 		</>
 	)

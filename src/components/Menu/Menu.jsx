@@ -26,7 +26,9 @@ export function Menu() {
 
 	return (
 		<>
-			<MenuList pizzas={menu} />
+			<div className='menu'>
+				<MenuList pizzas={menu} />
+			</div>
 		</>
 	)
 }
