@@ -9,7 +9,7 @@ function App() {
 			<div className='wrapper'>
 				<Routes>
 					<Route path='/menu' element={<Main />} />
-					<Route path='/login' element={<Login />} />
+					<Route path='/' element={<Login />} />
 
 					<Route path='*' element={<PageNotFound />} />
 				</Routes>

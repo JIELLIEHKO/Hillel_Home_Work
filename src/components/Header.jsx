@@ -10,7 +10,7 @@ export function Header() {
 				</a>
 
 				<nav className='nav'>
-					<NavLink to='/login' style={{ marginRight: '1rem' }}>
+					<NavLink to='/' style={{ marginRight: '1rem' }}>
 						Login
 					</NavLink>
 					<NavLink to='/menu'>Menu</NavLink>

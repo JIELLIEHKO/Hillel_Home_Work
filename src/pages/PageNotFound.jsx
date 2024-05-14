@@ -5,7 +5,7 @@ export function PageNotFound() {
 		<>
 			<div style={{ marginTop: '5rem' }}>
 				<h1>Page Not Found</h1>
-				<Link to='/login'>Back to home</Link>
+				<Link to='/'>Back to home</Link>
 			</div>
 		</>
 	)
