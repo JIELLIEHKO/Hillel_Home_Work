@@ -1,5 +1,6 @@
 import { MenuList } from './MenuList.jsx'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { MyContext } from '../../App.jsx'
 
 export function Menu() {
 	const [menu, setMenu] = useState([])
@@ -24,9 +25,13 @@ export function Menu() {
 		getAllPizzas()
 	}, [])
 
+	const data = useContext(MyContext)
 	return (
 		<>
 			<div className='menu'>
+				<div>
+					<h1>User: {data.user}</h1>
+				</div>
 				<MenuList pizzas={menu} />
 			</div>
 		</>
