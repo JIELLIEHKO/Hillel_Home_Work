@@ -2,13 +2,13 @@ import { Input } from '../Input/Input.jsx'
 import { Button } from '../Button/Button.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
-import { MyContext } from '../../App.jsx'
+import { UserContext } from '../../context/UserContext.jsx'
 
 export function FormLogin({ classForm, type, placeholder }) {
 	const navigate = useNavigate()
 	const [userName, setUserName] = useState('')
 
-	const data = useContext(MyContext)
+	const data = useContext(UserContext)
 
 	const handleChange = event => {
 		setUserName(event.target.value)
