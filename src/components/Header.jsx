@@ -13,7 +13,10 @@ export function Header() {
 					<NavLink to='/' style={{ marginRight: '1rem' }}>
 						Login
 					</NavLink>
-					<NavLink to='/menu'>Menu</NavLink>
+					<NavLink to='/menu' style={{ marginRight: '1rem' }}>
+						Menu
+					</NavLink>
+					<NavLink to='/order/new'>Order</NavLink>
 				</nav>
 
 				<Form

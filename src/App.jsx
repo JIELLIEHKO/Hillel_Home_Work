@@ -2,6 +2,7 @@ import { Main } from './pages/Main.jsx'
 import { Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login.jsx'
 import { PageNotFound } from './pages/PageNotFound.jsx'
+import { Order } from './pages/Order.jsx'
 
 function App() {
 	return (
@@ -11,6 +12,8 @@ function App() {
 					<Route path='/menu' element={<Main />} />
 
 					<Route path='/' element={<Login />} />
+
+					<Route path='/order/new' element={<Order />} />
 
 					<Route path='*' element={<PageNotFound />} />
 				</Routes>
