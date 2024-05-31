@@ -1,11 +1,15 @@
 import './Menu.css'
 import { Button } from '../Button/Button.jsx'
 import { useState } from 'react'
-// €
-export function MenuItem({ img, name, ingredients, price, sold }) {
-	const [counter, setCounter] = useState(0)
+import { addToCart } from '../../redux/slices/cartSlice.js'
+import { useDispatch } from 'react-redux'
 
-	const handleClickCounterAdd = () => {
+// €
+export function MenuItem({ img, name, ingredients, price, sold, pizza }) {
+	const [counter, setCounter] = useState(0)
+	const dispatch = useDispatch()
+
+	const handleClickCounterPlus = () => {
 		setCounter(counter + 1)
 	}
 
@@ -17,6 +21,11 @@ export function MenuItem({ img, name, ingredients, price, sold }) {
 
 	const handleClickCounterRemove = () => {
 		setCounter(0)
+	}
+
+	const handleClickAddOrder = pizza => {
+		dispatch(addToCart(pizza))
+		setCounter(1)
 	}
 
 	return (
@@ -43,7 +52,9 @@ export function MenuItem({ img, name, ingredients, price, sold }) {
 
 							{!sold && counter < 1 ? (
 								<div className='counter-button'>
-									<Button onClick={handleClickCounterAdd}>Add to cart</Button>
+									<Button onClick={() => handleClickAddOrder(pizza)}>
+										Add to cart
+									</Button>
 								</div>
 							) : (
 								!sold &&
@@ -54,7 +65,7 @@ export function MenuItem({ img, name, ingredients, price, sold }) {
 										</div>
 										<p>{counter}</p>
 										<div className='counter-button'>
-											<Button onClick={handleClickCounterAdd}>+</Button>
+											<Button onClick={handleClickCounterPlus}>+</Button>
 										</div>
 										<div className='counter-button'>
 											<Button onClick={handleClickCounterRemove}>Delete</Button>

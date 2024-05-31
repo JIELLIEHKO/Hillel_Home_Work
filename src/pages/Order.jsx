@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from '../components/Input/Input.jsx'
 import { Button } from '../components/Button/Button.jsx'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const formSchema = Yup.object().shape({
 	name: Yup.string().required('Поле не должно быть пустым'),
@@ -12,13 +14,15 @@ const formSchema = Yup.object().shape({
 })
 
 export function Order() {
+	const navigate = useNavigate()
+
 	const {
 		control,
 		handleSubmit,
 		formState: { errors }
 	} = useForm({
 		mode: 'onBlur',
-		defaultValue: {
+		defaultValues: {
 			name: '',
 			phone: '',
 			address: ''
@@ -27,12 +31,46 @@ export function Order() {
 		resolver: yupResolver(formSchema)
 	})
 
-	const onSubmit = data => {
-		console.log(data)
-	}
+	const cartItems = useSelector(store => store.cart.cartItems)
 
-	const handleClickOrder = () => {
-		console.log()
+	const onSubmit = async data => {
+		const orderData = {
+			address: data.address,
+			customer: data.name,
+			phone: data.phone,
+			priority: data.priority || false,
+			position: '',
+			cart: cartItems.map(item => ({
+				name: item.name,
+				pizzaId: item.id,
+				quantity: item.qty,
+				totalPrice: item.qty * item.unitPrice,
+				unitPrice: item.unitPrice
+			}))
+		}
+
+		try {
+			const response = await fetch(
+				'https://react-fast-pizza-api.onrender.com/api/order',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(orderData)
+				}
+			)
+
+			const result = await response.json()
+
+			if (result.status === 'success') {
+				navigate(`/order/${result.data.id}`)
+			} else {
+				alert('Something went wrong')
+			}
+		} catch (error) {
+			alert('Something went wrong')
+		}
 	}
 
 	return (
@@ -88,19 +126,17 @@ export function Order() {
 
 					<div className='container-checkbox'>
 						<label>
-							<input type='checkbox' />
+							<Controller
+								name='priority'
+								control={control}
+								render={({ field }) => <input type='checkbox' {...field} />}
+							/>
 							Want to give your order priority?
 						</label>
 					</div>
 
-					<div className='order-error'>
-						{/*{errors.address && <p>{errors.address.message}</p>}*/}
-					</div>
-
 					<div className='counter-button'>
-						<Button type='submit' onClick={handleClickOrder}>
-							Order now for
-						</Button>
+						<Button type='submit'>Order now for</Button>
 					</div>
 				</form>
 			</div>

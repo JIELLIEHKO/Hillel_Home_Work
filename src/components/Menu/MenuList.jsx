@@ -13,6 +13,7 @@ export function MenuList({ pizzas }) {
 					})}
 					price={pizza.unitPrice}
 					sold={pizza.soldOut && true}
+					pizza={pizza}
 				/>
 			))}
 		</>
