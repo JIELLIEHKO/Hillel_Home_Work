@@ -1,29 +1,16 @@
 import { MenuList } from './MenuList.jsx'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext.jsx'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllPizzas } from '../../redux/slices/cartSlice.js'
 
 export function Menu() {
-	const [menu, setMenu] = useState([])
+	const dispatch = useDispatch()
+	const pizzas = useSelector(state => state.cart.pizzas)
 
 	useEffect(() => {
-		const getAllPizzas = async () => {
-			try {
-				const res = await fetch(
-					'https://react-fast-pizza-api.onrender.com/api/menu'
-				)
-				const data = await res.json()
-
-				if (!res.ok) {
-					throw new Error('Error fetching pizza data.')
-				}
-
-				setMenu(data.data)
-			} catch (error) {
-				console.error(error.message)
-			}
-		}
-		getAllPizzas()
-	}, [])
+		dispatch(getAllPizzas())
+	}, [dispatch])
 
 	const data = useContext(UserContext)
 	return (
@@ -32,7 +19,7 @@ export function Menu() {
 				<div>
 					<h1>User: {data.user}</h1>
 				</div>
-				<MenuList pizzas={menu} />
+				<MenuList pizzas={pizzas} />
 			</div>
 		</>
 	)

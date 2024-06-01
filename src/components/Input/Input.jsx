@@ -1,21 +1,18 @@
-export function Input(props) {
-	const {
-		type = 'text',
-		value,
-		onChange,
-		onBlur,
-		placeholder = 'Placeholder'
-	} = props
+import React, { forwardRef } from 'react'
 
-	return (
-		<>
-			<input
-				type={type}
-				value={value || ''}
-				onChange={onChange}
-				placeholder={placeholder}
-				onBlur={onBlur}
-			/>
-		</>
-	)
-}
+export const Input = forwardRef(
+	({ type, value, onChange, onBlur, placeholder }, ref) => {
+		return (
+			<>
+				<input
+					ref={ref}
+					type={type}
+					value={value}
+					onChange={onChange}
+					placeholder={placeholder}
+					onBlur={onBlur}
+				/>
+			</>
+		)
+	}
+)

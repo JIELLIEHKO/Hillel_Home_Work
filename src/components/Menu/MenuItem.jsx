@@ -1,31 +1,26 @@
 import './Menu.css'
 import { Button } from '../Button/Button.jsx'
-import { useState } from 'react'
-import { addToCart } from '../../redux/slices/cartSlice.js'
-import { useDispatch } from 'react-redux'
+import {
+	addToCart,
+	decrement,
+	deleteFromCart,
+	increment
+} from '../../redux/slices/cartSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
 
 // €
 export function MenuItem({ img, name, ingredients, price, sold, pizza }) {
-	const [counter, setCounter] = useState(0)
 	const dispatch = useDispatch()
+	const items = useSelector(store => store.cart.cartItems)
+	const cartItem = items.find(item => item.id === pizza.id)
+	const qty = cartItem ? cartItem.qty : 0
 
-	const handleClickCounterPlus = () => {
-		setCounter(counter + 1)
-	}
-
-	const handleClickCounterMinus = () => {
-		if (counter > 0) {
-			setCounter(prevCounter => prevCounter - 1)
-		}
-	}
-
-	const handleClickCounterRemove = () => {
-		setCounter(0)
+	const handleDeleteFromCart = id => {
+		dispatch(deleteFromCart(id))
 	}
 
 	const handleClickAddOrder = pizza => {
 		dispatch(addToCart(pizza))
-		setCounter(1)
 	}
 
 	return (
@@ -50,7 +45,7 @@ export function MenuItem({ img, name, ingredients, price, sold, pizza }) {
 								{!sold ? `€${price}.00` : 'SOLD OUT'}
 							</p>
 
-							{!sold && counter < 1 ? (
+							{!sold && qty < 1 ? (
 								<div className='counter-button'>
 									<Button onClick={() => handleClickAddOrder(pizza)}>
 										Add to cart
@@ -58,17 +53,23 @@ export function MenuItem({ img, name, ingredients, price, sold, pizza }) {
 								</div>
 							) : (
 								!sold &&
-								counter > 0 && (
+								qty > 0 && (
 									<div className='counter'>
 										<div className='counter-button'>
-											<Button onClick={handleClickCounterMinus}>-</Button>
+											<Button onClick={() => dispatch(decrement(pizza.id))}>
+												-
+											</Button>
 										</div>
-										<p>{counter}</p>
+										<p>{qty}</p>
 										<div className='counter-button'>
-											<Button onClick={handleClickCounterPlus}>+</Button>
+											<Button onClick={() => dispatch(increment(pizza.id))}>
+												+
+											</Button>
 										</div>
 										<div className='counter-button'>
-											<Button onClick={handleClickCounterRemove}>Delete</Button>
+											<Button onClick={() => handleDeleteFromCart(pizza.id)}>
+												Delete
+											</Button>
 										</div>
 									</div>
 								)

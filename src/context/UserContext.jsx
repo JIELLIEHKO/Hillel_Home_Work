@@ -4,8 +4,12 @@ export const UserContext = createContext(null)
 
 export function UserContextProvider({ children }) {
 	const [user, setUser] = useState('')
+	const [orderId, setOrderId] = useState('')
 
-	const contextValue = useMemo(() => ({ user, setUser }), [user, setUser])
+	const contextValue = useMemo(
+		() => ({ user, setUser, orderId, setOrderId }),
+		[user, setUser, orderId, setOrderId]
+	)
 
 	return (
 		<>

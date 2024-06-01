@@ -5,7 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from '../components/Input/Input.jsx'
 import { Button } from '../components/Button/Button.jsx'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addOrderId, addOrderInfo } from '../redux/slices/cartSlice.js'
 
 const formSchema = Yup.object().shape({
 	name: Yup.string().required('Поле не должно быть пустым'),
@@ -15,25 +16,33 @@ const formSchema = Yup.object().shape({
 
 export function Order() {
 	const navigate = useNavigate()
-
 	const {
 		control,
 		handleSubmit,
+		setValue,
 		formState: { errors }
 	} = useForm({
 		mode: 'onBlur',
 		defaultValues: {
 			name: '',
 			phone: '',
-			address: ''
+			address: '',
+			priority: false
 		},
 
 		resolver: yupResolver(formSchema)
 	})
 
+	const dispatch = useDispatch()
+
 	const cartItems = useSelector(store => store.cart.cartItems)
 
 	const onSubmit = async data => {
+		if (cartItems.length === 0) {
+			alert('Кошик порожній')
+			return
+		}
+
 		const orderData = {
 			address: data.address,
 			customer: data.name,
@@ -62,8 +71,12 @@ export function Order() {
 			)
 
 			const result = await response.json()
+			console.log(orderData)
 
 			if (result.status === 'success') {
+				dispatch(addOrderInfo(orderData))
+				dispatch(addOrderId({ orderId: result.data.id }))
+				console.log(result.data.id)
 				navigate(`/order/${result.data.id}`)
 			} else {
 				alert('Something went wrong')
@@ -100,7 +113,7 @@ export function Order() {
 							control={control}
 							name='phone'
 							render={({ field }) => (
-								<Input {...field} type='phone' placeholder='' />
+								<Input {...field} type='text' placeholder='' />
 							)}
 						/>
 					</div>
@@ -129,7 +142,15 @@ export function Order() {
 							<Controller
 								name='priority'
 								control={control}
-								render={({ field }) => <input type='checkbox' {...field} />}
+								render={({ field }) => (
+									<Input
+										type='checkbox'
+										{...field}
+										onChange={e => {
+											setValue('priority', e.target.checked)
+										}}
+									/>
+								)}
 							/>
 							Want to give your order priority?
 						</label>
